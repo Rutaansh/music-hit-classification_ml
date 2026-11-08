@@ -238,11 +238,112 @@ html, body, [data-testid="stAppViewContainer"] {
     font-weight: 600 !important;
 }
 
-/* Dataframe Styling */
-[data-testid="stDataFrame"] {
+/* Dataframe & Table Universal High-Contrast Styling */
+[data-testid="stDataFrame"], [data-testid="stTable"], .stTable {
+    background: #ffffff !important;
     border-radius: 16px !important;
     overflow: hidden !important;
-    box-shadow: 0 4px 18px rgba(74, 21, 75, 0.08) !important;
+    box-shadow: 0 8px 24px rgba(74, 21, 75, 0.12) !important;
+    border: 1px solid rgba(226, 232, 240, 0.95) !important;
+}
+
+[data-testid="stTable"] table {
+    width: 100% !important;
+    background-color: #ffffff !important;
+    color: #1e1022 !important;
+    border-collapse: collapse !important;
+}
+
+[data-testid="stTable"] thead tr th {
+    background: linear-gradient(90deg, #3b0732 0%, #5e1248 100%) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.8px !important;
+    padding: 14px 16px !important;
+    border: none !important;
+}
+
+[data-testid="stTable"] tbody tr td {
+    background-color: #ffffff !important;
+    color: #1e1022 !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    padding: 12px 16px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+}
+
+[data-testid="stTable"] tbody tr:nth-child(even) td {
+    background-color: #fdf2f8 !important;
+}
+
+[data-testid="stTable"] tbody tr:hover td {
+    background-color: #fce4ec !important;
+}
+
+/* Custom HTML Table Styling for Absolute Theme Uniformity */
+.custom-table-container {
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 26px rgba(74, 21, 75, 0.12);
+    border: 1px solid rgba(226, 232, 240, 0.95);
+    margin: 16px 0 24px 0;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #1e1022;
+}
+
+.custom-table th {
+    background: linear-gradient(90deg, #380833 0%, #5e1248 50%, #4a154b 100%);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 14px 18px;
+    text-align: left;
+    border: none;
+}
+
+.custom-table td {
+    padding: 13px 18px;
+    font-size: 13.5px;
+    color: #1e1022;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.custom-table tr:nth-child(even) {
+    background-color: #fdf2f8;
+}
+
+.custom-table tr:hover {
+    background-color: #fce4ec;
+}
+
+.metric-highlight {
+    display: inline-block;
+    background: rgba(0, 82, 255, 0.12);
+    color: #0052FF;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 82, 255, 0.25);
+}
+
+.metric-best {
+    display: inline-block;
+    background: linear-gradient(90deg, #0052FF 0%, #00D2FF 100%);
+    color: #ffffff;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 82, 255, 0.3);
 }
 
 /* Section Header Styling */
@@ -635,7 +736,18 @@ if app_mode == "📊 Model Evaluation & Metrics":
     st.markdown("#### 📋 Detailed Classification Report")
     cr_dict = eval_res['Classification_Report']
     cr_df = pd.DataFrame(cr_dict).T.round(4)
-    st.dataframe(cr_df, use_container_width=True)
+    
+    # Render High-Contrast Custom HTML Table for Classification Report
+    cr_html = '<div class="custom-table-container"><table class="custom-table"><thead><tr>'
+    cr_html += '<th>Class / Metric</th><th>Precision</th><th>Recall</th><th>F1-Score</th><th>Support</th></tr></thead><tbody>'
+    for row_name, row_vals in cr_df.iterrows():
+        support_val = int(row_vals['support']) if 'support' in row_vals and not np.isnan(row_vals['support']) else '-'
+        p_val = f"{row_vals['precision']:.4f}" if 'precision' in row_vals else '-'
+        r_val = f"{row_vals['recall']:.4f}" if 'recall' in row_vals else '-'
+        f_val = f"{row_vals['f1-score']:.4f}" if 'f1-score' in row_vals else '-'
+        cr_html += f'<tr><td><b>{row_name}</b></td><td>{p_val}</td><td>{r_val}</td><td>{f_val}</td><td><b>{support_val}</b></td></tr>'
+    cr_html += '</tbody></table></div>'
+    st.markdown(cr_html, unsafe_allow_html=True)
 
 
 # =============================================================================
@@ -666,10 +778,34 @@ elif app_mode == "🏆 All Models Comparison":
     comp_df.index.name = "ML Model Name"
     
     st.markdown("#### 📊 Master Comparison Table (As Required in Assignment Step 5)")
-    st.dataframe(
-        comp_df.style.highlight_max(axis=0, color="#dbeafe").format("{:.4f}"),
-        use_container_width=True
-    )
+    
+    # Build High-Contrast Custom HTML Master Comparison Table
+    max_acc = comp_df["Accuracy"].max()
+    max_auc = comp_df["AUC"].max()
+    max_prec = comp_df["Precision"].max()
+    max_rec = comp_df["Recall"].max()
+    max_f1 = comp_df["F1"].max()
+    max_mcc = comp_df["MCC"].max()
+    
+    def highlight_cell(val, max_val):
+        if val == max_val:
+            return f'<span class="metric-best">{val:.4f} ★</span>'
+        return f'{val:.4f}'
+        
+    master_html = '<div class="custom-table-container"><table class="custom-table"><thead><tr>'
+    master_html += '<th>ML Model Name</th><th>Accuracy</th><th>AUC</th><th>Precision</th><th>Recall</th><th>F1</th><th>MCC</th></tr></thead><tbody>'
+    
+    for m_name, row in comp_df.iterrows():
+        master_html += f'<tr><td><b>{m_name}</b></td>'
+        master_html += f'<td>{highlight_cell(row["Accuracy"], max_acc)}</td>'
+        master_html += f'<td>{highlight_cell(row["AUC"], max_auc)}</td>'
+        master_html += f'<td>{highlight_cell(row["Precision"], max_prec)}</td>'
+        master_html += f'<td>{highlight_cell(row["Recall"], max_rec)}</td>'
+        master_html += f'<td>{highlight_cell(row["F1"], max_f1)}</td>'
+        master_html += f'<td>{highlight_cell(row["MCC"], max_mcc)}</td>'
+        master_html += '</tr>'
+    master_html += '</tbody></table></div>'
+    st.markdown(master_html, unsafe_allow_html=True)
     
     # Visual Comparison Charts
     c_col1, c_col2 = st.columns([1, 1])
@@ -765,7 +901,15 @@ elif app_mode == "🏆 All Models Comparison":
             "Observation about model performance": "Strong second-tier performer (Accuracy: 79.95%, Precision: 79.41%). The non-linear RBF kernel creates smooth decision boundaries but is computationally heavier."
         }
     ]
-    st.table(pd.DataFrame(obs_data))
+    
+    # Render High-Contrast Custom HTML Table for Observations
+    obs_html = '<div class="custom-table-container"><table class="custom-table"><thead><tr>'
+    obs_html += '<th style="width: 20%;">ML Model Name</th><th style="width: 80%;">Observation about model performance</th></tr></thead><tbody>'
+    for o in obs_data:
+        obs_html += f'<tr><td><b>{o["ML Model Name"]}</b><br><span style="font-size: 11px; color: #0052FF; font-weight: 700;">Acc: {o["Accuracy"]} | F1: {o["F1"]}</span></td>'
+        obs_html += f'<td style="line-height: 1.6;">{o["Observation about model performance"]}</td></tr>'
+    obs_html += '</tbody></table></div>'
+    st.markdown(obs_html, unsafe_allow_html=True)
     
     st.markdown("""
     <div class="winner-banner">
