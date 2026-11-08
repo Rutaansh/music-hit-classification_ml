@@ -1,6 +1,6 @@
 # BITS Pilani - Work Integrated Learning Programmes (WILP)
 ## M.Tech in Artificial Intelligence & Machine Learning (AIML)
-### Course: Machine Learning (Assignment - 2)
+### Course: Machine Learning S1-26_AIMLZG565 (Assignment - 2)
 
 ### Name : Rutaansh Nambiar
 ### BITS - ID : 2026AK05526
