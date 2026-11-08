@@ -1,0 +1,232 @@
+{
+    "Logistic Regression": {
+        "Accuracy": 0.8195,
+        "AUC": 0.8966,
+        "Precision": 0.8093,
+        "Recall": 0.6533,
+        "F1": 0.7229,
+        "MCC": 0.5988,
+        "Confusion_Matrix": [
+            [
+                1168,
+                111
+            ],
+            [
+                250,
+                471
+            ]
+        ],
+        "Classification_Report": {
+            "0": {
+                "precision": 0.8236953455571228,
+                "recall": 0.9132134480062549,
+                "f1-score": 0.8661475713756025,
+                "support": 1279.0
+            },
+            "1": {
+                "precision": 0.8092783505154639,
+                "recall": 0.6532593619972261,
+                "f1-score": 0.7229470452801228,
+                "support": 721.0
+            },
+            "accuracy": 0.8195,
+            "macro avg": {
+                "precision": 0.8164868480362933,
+                "recall": 0.7832364050017405,
+                "f1-score": 0.7945473083278627,
+                "support": 2000.0
+            },
+            "weighted avg": {
+                "precision": 0.8184980188446047,
+                "recall": 0.8195,
+                "f1-score": 0.8145237817181822,
+                "support": 2000.0
+            }
+        },
+        "Artifact_File": "logistic_regression.joblib"
+    },
+    "Decision Tree": {
+        "Accuracy": 0.815,
+        "AUC": 0.8925,
+        "Precision": 0.7388,
+        "Recall": 0.7531,
+        "F1": 0.7459,
+        "MCC": 0.6005,
+        "Confusion_Matrix": [
+            [
+                1087,
+                192
+            ],
+            [
+                178,
+                543
+            ]
+        ],
+        "Classification_Report": {
+            "0": {
+                "precision": 0.8592885375494071,
+                "recall": 0.8498827208756842,
+                "f1-score": 0.8545597484276729,
+                "support": 1279.0
+            },
+            "1": {
+                "precision": 0.7387755102040816,
+                "recall": 0.753120665742025,
+                "f1-score": 0.7458791208791209,
+                "support": 721.0
+            },
+            "accuracy": 0.815,
+            "macro avg": {
+                "precision": 0.7990320238767443,
+                "recall": 0.8015016933088546,
+                "f1-score": 0.8002194346533968,
+                "support": 2000.0
+            },
+            "weighted avg": {
+                "precision": 0.8158435911914174,
+                "recall": 0.815,
+                "f1-score": 0.8153803821964198,
+                "support": 2000.0
+            }
+        },
+        "Artifact_File": "decision_tree.joblib"
+    },
+    "KNN": {
+        "Accuracy": 0.719,
+        "AUC": 0.7799,
+        "Precision": 0.6293,
+        "Recall": 0.5368,
+        "F1": 0.5793,
+        "MCC": 0.373,
+        "Confusion_Matrix": [
+            [
+                1051,
+                228
+            ],
+            [
+                334,
+                387
+            ]
+        ],
+        "Classification_Report": {
+            "0": {
+                "precision": 0.7588447653429603,
+                "recall": 0.8217357310398749,
+                "f1-score": 0.789039039039039,
+                "support": 1279.0
+            },
+            "1": {
+                "precision": 0.6292682926829268,
+                "recall": 0.536754507628294,
+                "f1-score": 0.5793413173652695,
+                "support": 721.0
+            },
+            "accuracy": 0.719,
+            "macro avg": {
+                "precision": 0.6940565290129436,
+                "recall": 0.6792451193340845,
+                "f1-score": 0.6841901782021542,
+                "support": 2000.0
+            },
+            "weighted avg": {
+                "precision": 0.7121324469490182,
+                "recall": 0.719,
+                "f1-score": 0.7134430103756452,
+                "support": 2000.0
+            }
+        },
+        "Artifact_File": "knn.joblib"
+    },
+    "Naive Bayes": {
+        "Accuracy": 0.7495,
+        "AUC": 0.8638,
+        "Precision": 0.6111,
+        "Recall": 0.8391,
+        "F1": 0.7072,
+        "MCC": 0.5168,
+        "Confusion_Matrix": [
+            [
+                894,
+                385
+            ],
+            [
+                116,
+                605
+            ]
+        ],
+        "Classification_Report": {
+            "0": {
+                "precision": 0.8851485148514852,
+                "recall": 0.6989835809225958,
+                "f1-score": 0.781127129750983,
+                "support": 1279.0
+            },
+            "1": {
+                "precision": 0.6111111111111112,
+                "recall": 0.8391123439667129,
+                "f1-score": 0.7071887784921099,
+                "support": 721.0
+            },
+            "accuracy": 0.7495,
+            "macro avg": {
+                "precision": 0.7481298129812981,
+                "recall": 0.7690479624446543,
+                "f1-score": 0.7441579541215464,
+                "support": 2000.0
+            },
+            "weighted avg": {
+                "precision": 0.7863580308030803,
+                "recall": 0.7495,
+                "f1-score": 0.7544723541221592,
+                "support": 2000.0
+            }
+        },
+        "Artifact_File": "naive_bayes.joblib"
+    },
+    "Support Vector Machine": {
+        "Accuracy": 0.7995,
+        "AUC": 0.8736,
+        "Precision": 0.7941,
+        "Recall": 0.5992,
+        "F1": 0.683,
+        "MCC": 0.552,
+        "Confusion_Matrix": [
+            [
+                1167,
+                112
+            ],
+            [
+                289,
+                432
+            ]
+        ],
+        "Classification_Report": {
+            "0": {
+                "precision": 0.801510989010989,
+                "recall": 0.9124315871774824,
+                "f1-score": 0.853382084095064,
+                "support": 1279.0
+            },
+            "1": {
+                "precision": 0.7941176470588235,
+                "recall": 0.5991678224687933,
+                "f1-score": 0.68300395256917,
+                "support": 721.0
+            },
+            "accuracy": 0.7995,
+            "macro avg": {
+                "precision": 0.7978143180349062,
+                "recall": 0.7557997048231379,
+                "f1-score": 0.7681930183321171,
+                "support": 2000.0
+            },
+            "weighted avg": {
+                "precision": 0.7988456892372334,
+                "recall": 0.7995,
+                "f1-score": 0.7919607676799792,
+                "support": 2000.0
+            }
+        },
+        "Artifact_File": "svm.joblib"
+    }
+}
