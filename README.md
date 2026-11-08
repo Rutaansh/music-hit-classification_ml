@@ -100,26 +100,3 @@ ML_Assignment_2/
 
 ---
 
-## f. Instructions to Run Locally & on BITS Virtual Lab
-
-### 1. Local / BITS Virtual Lab Execution:
-```bash
-# Clone the repository
-git clone https://github.com/rutaanshnambiar/ML_Assignment_2.git
-cd ML_Assignment_2
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Run model training (optional, artifacts already included)
-python train_models.py
-
-# Launch interactive Streamlit Application
-streamlit run app.py
-```
-
-### 2. Streamlit Community Cloud Deployment Steps:
-1. Push this repository to your GitHub account (`main` branch).
-2. Navigate to [https://streamlit.io/cloud](https://streamlit.io/cloud) and sign in with GitHub.
-3. Click **"New App"** $\rightarrow$ Select your repository `rutaanshnambiar/ML_Assignment_2`.
-4. Set Main file path to `app.py` and click **"Deploy"**.
